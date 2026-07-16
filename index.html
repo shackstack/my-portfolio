@@ -1,0 +1,1870 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>김민석 — 프론트엔드 엔지니어</title>
+    <meta
+      name="description"
+      content="기능을 만드는 것만큼 팀이 일하는 방식의 반복 비용을 줄이는 데 관심이 많은 프론트엔드 엔지니어 김민석의 포트폴리오."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ============ Pretendard (local) ============ */
+      @font-face {
+        font-family: "Pretendard Variable";
+        font-weight: 45 920;
+        font-style: normal;
+        font-display: swap;
+        src: url("./PretendardVariable.woff2") format("woff2-variations");
+      }
+
+      /* ============ Tokens (DESIGN-airtable.md) ============ */
+      :root {
+        --primary: #181d26;
+        --primary-active: #0d1218;
+        --primary-disabled: #e0e2e6;
+        --ink: #181d26;
+        --body: #333840;
+        --body-strong: #181d26;
+        --muted: #41454d;
+        --muted-soft: #9297a0;
+        --hairline: #dddddd;
+        --hairline-soft: #e7e7e7;
+        --canvas: #ffffff;
+        --surface-soft: #f8fafc;
+        --surface-card: #f8fafc;
+        --surface-cream-strong: #e0e2e6;
+        --surface-dark: #181d26;
+        --surface-dark-elevated: #1d1f25;
+        --surface-dark-soft: #14181f;
+        --on-primary: #ffffff;
+        --on-dark: #ffffff;
+        --on-dark-soft: #9aa1ad;
+        --accent-teal: #a8d8c4;
+        --accent-amber: #fcab79;
+        --sig-coral: #aa2d00;
+        --sig-forest: #0a2e0e;
+        --sig-cream: #f5e9d4;
+        --sig-peach: #fcab79;
+        --sig-mint: #a8d8c4;
+        --sig-yellow: #f4d35e;
+        --sig-mustard: #d9a441;
+        --link: #1b61c9;
+        --link-active: #1a3866;
+        --success-border: #39bf45;
+
+        --serif:
+          "Pretendard Variable", "Inter Display", Inter, -apple-system,
+          BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", sans-serif;
+        --sans:
+          "Pretendard Variable", Inter, -apple-system, BlinkMacSystemFont,
+          system-ui, "Apple SD Gothic Neo", sans-serif;
+        --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+        --r-sm: 6px;
+        --r-md: 10px;
+        --r-lg: 12px;
+        --r-xl: 12px;
+        --r-pill: 9999px;
+
+        --s-xs: 8px;
+        --s-sm: 12px;
+        --s-md: 16px;
+        --s-lg: 24px;
+        --s-xl: 32px;
+        --s-xxl: 48px;
+        --s-section: 96px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--sans);
+        color: var(--ink);
+        background: var(--canvas);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /* ============ Type scale (Haas-style: modest weights, no bold) ============ */
+      .display-xl {
+        font-family: var(--sans);
+        font-size: clamp(32px, 4.2vw, 48px);
+        font-weight: 500;
+        line-height: 1.16;
+        letter-spacing: 0;
+      }
+      .display-lg {
+        font-family: var(--sans);
+        font-size: clamp(28px, 3.4vw, 40px);
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+      .display-md {
+        font-family: var(--sans);
+        font-size: clamp(24px, 2.7vw, 32px);
+        font-weight: 400;
+        line-height: 1.24;
+        letter-spacing: 0;
+      }
+      .display-sm {
+        font-family: var(--sans);
+        font-size: clamp(20px, 2.1vw, 24px);
+        font-weight: 400;
+        line-height: 1.35;
+        letter-spacing: 0.12px;
+      }
+      .title-md {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 1.4;
+      }
+      .body-md {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.62;
+        color: var(--body);
+      }
+      .body-sm {
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--body);
+      }
+      .caption-upper {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .lead {
+        font-size: clamp(17px, 1.8vw, 19px);
+        line-height: 1.66;
+        color: var(--body);
+      }
+
+      /* ============ Scroll reveal ============ */
+      .reveal-on .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.65s cubic-bezier(0.2, 0.7, 0.2, 1),
+          transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .reveal-on .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+      .reveal-on .reveal.d1 {
+        transition-delay: 0.08s;
+      }
+      .reveal-on .reveal.d2 {
+        transition-delay: 0.16s;
+      }
+      .reveal-on .reveal.d3 {
+        transition-delay: 0.24s;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .reveal-on .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+      }
+
+      /* ============ Top nav ============ */
+      .top-nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        height: 64px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: saturate(160%) blur(14px);
+        -webkit-backdrop-filter: saturate(160%) blur(14px);
+        border-bottom: 1px solid var(--hairline-soft);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 max(24px, 5vw);
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 0;
+      }
+      .brand svg {
+        display: block;
+      }
+      .top-nav nav {
+        display: flex;
+        gap: 28px;
+      }
+      .top-nav nav a {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--body);
+        transition: color 0.15s;
+      }
+      .top-nav nav a:hover {
+        color: var(--ink);
+      }
+      .nav-cta {
+        display: inline-flex;
+        align-items: center;
+        height: 38px;
+        padding: 0 18px;
+        border-radius: var(--r-lg);
+        background: var(--primary);
+        color: var(--on-primary);
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .nav-cta:active {
+        background: var(--primary-active);
+      }
+      @media (max-width: 900px) {
+        .top-nav nav {
+          display: none;
+        }
+      }
+
+      /* ============ Bands — white floor; voltage lives in signature cards ============ */
+      .band {
+        padding: var(--s-section) max(24px, 5vw);
+      }
+      .band.canvas {
+        background: var(--canvas);
+      }
+      .band.soft {
+        background: var(--canvas);
+      }
+      .band.dark {
+        background: var(--canvas);
+        color: var(--on-dark);
+      }
+      .band.dark .inner {
+        background: var(--surface-dark);
+        border-radius: var(--r-lg);
+        padding: var(--s-xxl);
+      }
+      @media (max-width: 700px) {
+        .band.dark .inner {
+          padding: var(--s-xl) var(--s-lg);
+          border-radius: var(--r-md);
+        }
+      }
+      .inner {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* eyebrow */
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--primary);
+        margin-bottom: var(--s-lg);
+      }
+      .eyebrow::before {
+        content: "";
+        width: 20px;
+        height: 1px;
+        background: var(--primary);
+      }
+      .case-index {
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--muted);
+        margin-bottom: var(--s-sm);
+      }
+      .dark .case-index {
+        color: var(--on-dark-soft);
+      }
+
+      .text-link {
+        color: var(--link);
+        font-size: 15px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .text-link:active {
+        color: var(--link-active);
+      }
+      .dark .text-link {
+        color: #458fff;
+      }
+      .text-link:hover {
+        text-decoration: underline;
+      }
+      .text-link .chev {
+        transition: transform 0.2s;
+      }
+      .text-link:hover .chev {
+        transform: translateX(3px);
+      }
+
+      /* ============ Badges / chips ============ */
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--s-xs);
+      }
+      .chip {
+        font-size: 13px;
+        font-weight: 500;
+        padding: 4px 12px;
+        border-radius: var(--r-sm);
+        background: var(--surface-soft);
+        border: 1px solid var(--hairline-soft);
+        color: var(--ink);
+        white-space: nowrap;
+      }
+      .dark .chip {
+        background: var(--surface-dark-elevated);
+        border-color: #2a303c;
+        color: var(--on-dark-soft);
+      }
+
+      /* ============ HERO ============ */
+      .hero {
+        padding-top: 84px;
+        padding-bottom: 72px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 6fr 5fr;
+        gap: var(--s-xxl);
+        align-items: center;
+      }
+      @media (max-width: 1024px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .hero .lead {
+        margin-top: var(--s-lg);
+        max-width: 560px;
+      }
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 6px 14px;
+        border-radius: var(--r-sm);
+        background: var(--surface-soft);
+        border: 1px solid var(--hairline-soft);
+        margin-bottom: var(--s-lg);
+      }
+      .hero-badge .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--success-border);
+      }
+
+      /* hero terminal mock */
+      .terminal {
+        border-radius: var(--r-xl);
+        background: var(--surface-dark);
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(20, 20, 19, 0.08);
+      }
+      .terminal-bar {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 16px;
+        background: var(--surface-dark-elevated);
+      }
+      .t-dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #3a4150;
+      }
+      .terminal-title {
+        margin-left: 8px;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--on-dark-soft);
+      }
+      .terminal-body {
+        padding: 22px 24px 26px;
+        font-family: var(--mono);
+        font-size: 13px;
+        line-height: 1.9;
+        color: var(--on-dark);
+        overflow-x: auto;
+      }
+      .terminal-body .p {
+        color: var(--on-dark-soft);
+      }
+      .terminal-body .cmd {
+        color: var(--accent-amber);
+      }
+      .terminal-body .step {
+        color: var(--on-dark-soft);
+      }
+      .terminal-body .step::before {
+        content: "⏺ ";
+        color: var(--sig-peach);
+      }
+      .terminal-body .ok {
+        color: var(--accent-teal);
+      }
+
+      /* stat band */
+      .statband {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--s-lg);
+        margin-top: 72px;
+        padding-top: var(--s-xl);
+        border-top: 1px solid var(--hairline);
+      }
+      .stat .num {
+        font-family: var(--sans);
+        font-size: clamp(30px, 3.4vw, 42px);
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 1.1;
+        color: var(--ink);
+      }
+      .stat .num .unit {
+        font-size: 0.5em;
+        color: var(--muted-soft);
+        letter-spacing: 0;
+      }
+      .stat .label {
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 1.45;
+        color: var(--muted);
+      }
+      @media (max-width: 768px) {
+        .statband {
+          grid-template-columns: repeat(2, 1fr);
+          gap: var(--s-xl) var(--s-lg);
+        }
+      }
+
+      /* ============ Case scaffolding ============ */
+      .case-head {
+        max-width: 780px;
+        margin-bottom: var(--s-xxl);
+      }
+      .case-head .lead {
+        margin-top: var(--s-md);
+      }
+      .dark .case-head .lead {
+        color: var(--on-dark-soft);
+      }
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--s-lg);
+        margin-top: var(--s-lg);
+      }
+      .meta-row .period {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .dark .meta-row .period {
+        color: var(--on-dark-soft);
+      }
+
+      /* P/A/I */
+      .pai {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--s-lg);
+        margin-bottom: var(--s-xxl);
+      }
+      @media (max-width: 900px) {
+        .pai {
+          grid-template-columns: 1fr;
+          gap: var(--s-md);
+        }
+      }
+      .pai > div {
+        border-top: 1px solid var(--hairline);
+        padding-top: var(--s-md);
+      }
+      .dark .pai > div {
+        border-color: #2a303c;
+      }
+      .pai .k {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--primary);
+        margin-bottom: 10px;
+      }
+      .pai .v {
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--body);
+      }
+      .dark .pai .v {
+        color: var(--on-dark-soft);
+      }
+
+      /* workflow cards (feature-card) */
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--s-lg);
+      }
+      @media (max-width: 1024px) {
+        .card-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 700px) {
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .feature-card {
+        background: var(--surface-soft);
+        border-radius: var(--r-md);
+        padding: var(--s-xl);
+      }
+      .feature-card.fc-cream {
+        background: var(--sig-cream);
+      }
+      .feature-card.fc-peach {
+        background: var(--sig-peach);
+      }
+      .feature-card.fc-mint {
+        background: var(--sig-mint);
+      }
+      .feature-card.fc-yellow {
+        background: var(--sig-yellow);
+      }
+      .feature-card.fc-mustard {
+        background: var(--sig-mustard);
+      }
+      .feature-card .fc-no {
+        font-family: var(--mono);
+        font-size: 13px;
+        color: rgba(24, 29, 38, 0.55);
+        margin-bottom: 14px;
+      }
+      .feature-card h4 {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 1.35;
+        letter-spacing: 0;
+        color: var(--ink);
+      }
+      .feature-card p {
+        margin-top: 10px;
+        font-size: 14.5px;
+        line-height: 1.6;
+        color: rgba(24, 29, 38, 0.78);
+      }
+      .feature-card .fc-metric {
+        margin-top: 16px;
+        font-family: var(--sans);
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: 0;
+        color: var(--ink);
+      }
+
+      /* metric callouts */
+      .metric-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--s-lg);
+      }
+      @media (max-width: 900px) {
+        .metric-row {
+          grid-template-columns: 1fr;
+        }
+      }
+      .metric-card {
+        border-radius: var(--r-md);
+        padding: 28px var(--s-xl);
+        background: var(--canvas);
+        border: 1px solid var(--hairline);
+      }
+      .soft .metric-card {
+        background: var(--canvas);
+      }
+      .dark .metric-card {
+        background: var(--surface-dark-elevated);
+        border-color: #2a303c;
+      }
+      .metric-card .big {
+        font-family: var(--sans);
+        font-size: clamp(26px, 2.7vw, 32px);
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 1.15;
+        color: var(--ink);
+      }
+      .dark .metric-card .big {
+        color: var(--on-dark);
+      }
+      .metric-card .big .accent {
+        color: var(--muted-soft);
+      }
+      .metric-card .cap {
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+      .dark .metric-card .cap {
+        color: var(--on-dark-soft);
+      }
+
+      /* code window */
+      .code-window {
+        border-radius: var(--r-lg);
+        background: var(--surface-dark);
+        overflow: hidden;
+      }
+      .dark .code-window {
+        border: 1px solid #2a303c;
+      }
+      .cw-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 42px;
+        padding: 0 18px;
+        background: var(--surface-dark-elevated);
+      }
+      .cw-title {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--on-dark-soft);
+        margin-left: 6px;
+      }
+      .cw-body {
+        padding: 22px 24px;
+        background: var(--surface-dark-soft);
+        font-family: var(--mono);
+        font-size: 13px;
+        line-height: 1.8;
+        color: #d3d7de;
+        overflow-x: auto;
+      }
+      .cw-body .cm {
+        color: #6b7280;
+      }
+      .cw-body .kw {
+        color: var(--sig-peach);
+      }
+      .cw-body .st {
+        color: var(--sig-mint);
+      }
+      .cw-body .fn {
+        color: var(--sig-yellow);
+      }
+
+      /* two-col split (text + code) */
+      .split {
+        display: grid;
+        grid-template-columns: 5fr 6fr;
+        gap: var(--s-xxl);
+        align-items: center;
+      }
+      @media (max-width: 1024px) {
+        .split {
+          grid-template-columns: 1fr;
+          gap: var(--s-xl);
+        }
+      }
+
+      /* numbered feature list */
+      .feat-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--s-xl) var(--s-xxl);
+      }
+      @media (max-width: 900px) {
+        .feat-list {
+          grid-template-columns: 1fr;
+        }
+      }
+      .feat {
+        display: grid;
+        grid-template-columns: 44px 1fr;
+        gap: var(--s-md);
+        border-top: 1px solid var(--hairline);
+        padding-top: var(--s-lg);
+      }
+      .dark .feat {
+        border-color: #2a303c;
+      }
+      .feat .fn-no {
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--primary);
+        padding-top: 4px;
+      }
+      .feat h4 {
+        font-size: 17.5px;
+        font-weight: 500;
+        line-height: 1.4;
+        letter-spacing: 0;
+      }
+      .feat h4 a:hover {
+        color: var(--link);
+      }
+      .feat p {
+        margin-top: 8px;
+        font-size: 14.5px;
+        line-height: 1.62;
+        color: var(--body);
+      }
+      .dark .feat p {
+        color: var(--on-dark-soft);
+      }
+
+      /* ============ bar chart ============ */
+      .chart-wrap {
+        display: grid;
+        grid-template-columns: 6fr 5fr;
+        gap: var(--s-xxl);
+        align-items: center;
+        background: var(--sig-cream);
+        border-radius: var(--r-lg);
+        padding: var(--s-xxl);
+      }
+      @media (max-width: 1024px) {
+        .chart-wrap {
+          grid-template-columns: 1fr;
+          gap: var(--s-xl);
+          padding: var(--s-xl);
+        }
+      }
+      .bars {
+        display: flex;
+        align-items: flex-end;
+        gap: var(--s-xxl);
+        height: 230px;
+        padding: var(--s-md) var(--s-lg) 0;
+      }
+      .bar {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
+      }
+      .bar .col {
+        width: 100%;
+        max-width: 88px;
+        border-radius: 4px 4px 0 0;
+        height: 0;
+        transition: height 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .bar.before .col {
+        background: var(--muted-soft);
+      }
+      .bar.after .col {
+        background: var(--sig-coral);
+      }
+      .bar .bval {
+        font-family: var(--sans);
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: 0;
+        color: var(--ink);
+        margin-bottom: 8px;
+      }
+      .bar .blabel {
+        margin-top: 12px;
+        font-size: 13.5px;
+        color: var(--muted);
+        text-align: center;
+        line-height: 1.4;
+      }
+      .chart-caption p {
+        margin-top: var(--s-sm);
+        font-size: 15px;
+        line-height: 1.65;
+        color: var(--body);
+      }
+
+      /* ============ Selected work ============ */
+      .work-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--s-lg);
+      }
+      @media (max-width: 1024px) {
+        .work-grid {
+          grid-template-columns: 1fr;
+          max-width: 560px;
+        }
+      }
+      .work-card {
+        background: var(--canvas);
+        border: 1px solid var(--hairline);
+        border-radius: var(--r-md);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .work-cover {
+        height: 136px;
+        position: relative;
+        background: var(--surface-cream-strong);
+      }
+      .work-cover .tag {
+        position: absolute;
+        top: 14px;
+        left: 16px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+        padding: 4px 12px;
+        border-radius: var(--r-sm);
+        background: rgba(24, 29, 38, 0.55);
+        color: var(--on-dark);
+        backdrop-filter: blur(4px);
+      }
+      .work-cover .tag.award {
+        left: auto;
+        right: 16px;
+        background: var(--sig-coral);
+        backdrop-filter: none;
+      }
+      .work-cover.wordmark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--sig-forest);
+      }
+      .work-cover.wordmark .wm {
+        font-family: var(--sans);
+        font-size: 28px;
+        font-weight: 500;
+        letter-spacing: 0;
+        color: var(--on-dark);
+      }
+      .work-cover.wordmark .wm em {
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.62);
+        font-size: 0.7em;
+        margin-left: 10px;
+      }
+      .work-body {
+        padding: var(--s-lg) var(--s-lg) var(--s-lg);
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .work-body h3 {
+        font-family: var(--sans);
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: 0;
+      }
+      .work-body .wsub {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 6px 0 12px;
+      }
+      .work-body p {
+        font-size: 14.5px;
+        line-height: 1.6;
+        color: var(--body);
+        flex: 1;
+      }
+      .work-body .chips {
+        margin-top: 14px;
+      }
+      .work-body .wlinks {
+        margin-top: 16px;
+        display: flex;
+        gap: var(--s-md);
+      }
+      .work-body .wlinks .text-link {
+        font-size: 14px;
+      }
+
+      /* ============ Education ============ */
+      .edu-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--s-lg);
+      }
+      @media (max-width: 900px) {
+        .edu-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .edu-card {
+        background: var(--surface-soft);
+        border-radius: var(--r-lg);
+        padding: var(--s-xl);
+      }
+      .edu-card h3 {
+        font-family: var(--sans);
+        font-size: 19px;
+        font-weight: 500;
+        letter-spacing: 0;
+      }
+      .edu-card .ep {
+        font-size: 13.5px;
+        color: var(--muted);
+        margin: 6px 0 var(--s-md);
+      }
+      .bullets {
+        display: grid;
+        gap: 10px;
+      }
+      .bullets li {
+        position: relative;
+        padding-left: 18px;
+        font-size: 14.5px;
+        line-height: 1.55;
+        color: var(--body);
+      }
+      .bullets li::before {
+        content: "";
+        position: absolute;
+        left: 2px;
+        top: 9px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--primary);
+      }
+      .bullets a {
+        color: var(--primary);
+      }
+      .bullets a:hover {
+        text-decoration: underline;
+      }
+
+      /* ============ Footer — light, editorial ============ */
+      footer {
+        background: var(--canvas);
+        color: var(--muted);
+        border-top: 1px solid var(--hairline-soft);
+        padding: 64px max(24px, 5vw);
+      }
+      .footer-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .footer-name {
+        font-family: var(--sans);
+        font-size: 19px;
+        font-weight: 500;
+        letter-spacing: 0;
+        color: var(--ink);
+      }
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--s-lg);
+        margin-top: var(--s-lg);
+        font-size: 14px;
+      }
+      .footer-links a {
+        color: var(--muted);
+        transition: color 0.15s;
+      }
+      .footer-links a:hover {
+        color: var(--ink);
+      }
+      .footer-legal {
+        margin-top: var(--s-xxl);
+        padding-top: var(--s-lg);
+        border-top: 1px solid var(--hairline-soft);
+        font-size: 12.5px;
+        color: var(--muted-soft);
+      }
+
+      @media (max-width: 640px) {
+        .band {
+          padding: 64px max(20px, 5vw);
+        }
+        .hero {
+          padding-top: 56px;
+          padding-bottom: 48px;
+        }
+      }
+
+      /* ============ Print / PDF ============ */
+      @media print {
+        @page {
+          margin: 0;
+        }
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+        .reveal-on .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+        .top-nav {
+          position: static;
+        }
+        .band {
+          padding: 44px max(28px, 5vw);
+        }
+        .hero {
+          padding-top: 40px;
+          padding-bottom: 32px;
+        }
+        .statband {
+          margin-top: 36px;
+        }
+        .case-head,
+        .pai,
+        .statband,
+        .metric-card,
+        .feature-card,
+        .feat,
+        .code-window,
+        .chart-wrap,
+        .work-card,
+        .edu-card,
+        .terminal {
+          break-inside: avoid;
+        }
+        section.band {
+          break-inside: avoid;
+        }
+        a {
+          color: inherit;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- TOP NAV -->
+    <header class="top-nav">
+      <a href="#top" class="brand" aria-label="김민석">
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M8 0.5 L9.4 6.6 L15.5 8 L9.4 9.4 L8 15.5 L6.6 9.4 L0.5 8 L6.6 6.6 Z"
+            fill="#181d26"
+          />
+        </svg>
+        김민석
+      </a>
+      <nav>
+        <a href="#ai">AI 자동화</a>
+        <a href="#ecp">ECP 리뉴얼</a>
+        <a href="#creator">크리에이터클럽</a>
+        <a href="#work">그 외 작업</a>
+        <a href="#education">교육</a>
+      </nav>
+      <a class="nav-cta" href="mailto:minseok1061@gmail.com">연락하기</a>
+    </header>
+
+    <!-- HERO -->
+    <section id="top" class="band canvas hero">
+      <div class="inner">
+        <div class="hero-grid">
+          <div>
+            <span class="hero-badge reveal"
+              ><span class="dot"></span>Frontend Engineer ·
+              라텔앤드파트너즈</span
+            >
+            <h1 class="display-xl reveal d1">
+              제품의 완성도와<br />팀의 생산성을<br />함께 끌어올립니다.
+            </h1>
+            <p class="lead reveal d2">
+              기능을 만드는 것만큼 팀이 일하는 방식의 반복 비용을 줄이는 데
+              관심이 많은 프론트엔드 엔지니어입니다. 사용자 관점에서 개선점을
+              능동적으로 도출하고, 반복되는 업무는 워크플로우와 시스템으로
+              만듭니다.
+            </p>
+          </div>
+          <div class="terminal reveal d2" aria-hidden="true">
+            <div class="terminal-bar">
+              <span class="t-dot"></span><span class="t-dot"></span
+              ><span class="t-dot"></span>
+              <span class="terminal-title">claude — deploy-dev</span>
+            </div>
+            <div class="terminal-body">
+              <div><span class="p">minseok@ratel ~ %</span> claude</div>
+              <div><span class="cmd">&gt; /deploy-dev</span> RF-1024</div>
+              <div class="step">git remote 감지 → Jenkins Job 자동 매핑</div>
+              <div class="step">머지 · tsc → push 완료 (하드 배리어)</div>
+              <div class="step">PR 작성 ∥ 빌드 트리거 — 백그라운드 병렬</div>
+              <div class="step">빌드 SUCCESS → JIRA 상태 자동 전이</div>
+              <div class="ok">✓ 완료 — 15분 걸리던 배포가 2분으로</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="statband reveal">
+          <div class="stat">
+            <div class="num">6<span class="unit">개</span></div>
+            <div class="label">자동화한<br />핵심 워크플로우</div>
+          </div>
+          <div class="stat">
+            <div class="num">4<span class="unit">h/주</span></div>
+            <div class="label">절감한<br />반복 업무 시간</div>
+          </div>
+          <div class="stat">
+            <div class="num">78.5<span class="unit">%↓</span></div>
+            <div class="label">ECP 리뉴얼<br />번들 크기 감축</div>
+          </div>
+          <div class="stat">
+            <div class="num">10→100<span class="unit">%</span></div>
+            <div class="label">iOS 이탈 로그<br />요청 성공률</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE 01 : AI 워크플로우 자동화 -->
+    <section id="ai" class="band soft">
+      <div class="inner">
+        <div class="case-head">
+          <p class="case-index reveal">CASE 01 · 2025 —</p>
+          <h2 class="display-lg reveal d1">
+            반복되는 업무는<br />워크플로우로 만듭니다.
+          </h2>
+          <p class="lead reveal d2">
+            배포·이슈 관리·보고·코드리뷰·화면 작업·도메인 문서 작업까지, 흩어져
+            있던 반복 절차를 독립적인 커스텀 스킬로 나누고 6개의 핵심
+            워크플로우로 통합했습니다.
+          </p>
+          <div class="chips reveal d3" style="margin-top: var(--s-lg)">
+            <span class="chip">Claude Code</span>
+            <span class="chip">Custom Skills</span>
+            <span class="chip">Plugin Architecture</span>
+            <span class="chip">Figma · Playwright · GitHub MCP</span>
+            <span class="chip">JIRA · Confluence · Bitbucket · Slack</span>
+            <span class="chip">Jenkins (CI/CD)</span>
+          </div>
+        </div>
+
+        <div class="pai reveal">
+          <div>
+            <div class="k">Problem</div>
+            <div class="v">
+              티켓 생성·개발서버 반영·PR·배포·보고가 제각기 수작업으로 흩어져
+              있었습니다. 절차가 누락되거나 휴먼에러가 생기기 쉬웠고, 기준도
+              사람마다 달랐습니다.
+            </div>
+          </div>
+          <div>
+            <div class="k">Approach</div>
+            <div class="v">
+              LLM을 코드 생성 도구가 아니라 반복 업무를 표준화하는 실행 계층으로
+              활용했습니다. 각 단계를 독립 스킬로 분리하고 MCP로 도구를 연동해
+              하나의 워크플로우로 묶되, 되돌리기 어려운 작업은 사람의 확인
+              게이트로 남겼습니다.
+            </div>
+          </div>
+          <div>
+            <div class="k">Impact</div>
+            <div class="v">
+              개인 생산성을 넘어 팀 단위 워크플로우 표준화로 이어졌고, 주당 약
+              4시간의 반복 업무 시간을 되찾았습니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 workflows -->
+        <div class="card-grid reveal">
+          <div class="feature-card fc-cream">
+            <div class="fc-no">01</div>
+            <h4>배포 파이프라인 단일 명령화</h4>
+            <p>
+              git remote를 감지해 Jenkins Job을 자동 매핑하고, 머지·tsc·PR
+              생성을 백그라운드 병렬로 처리합니다. 푸시 완료를 하드 배리어로
+              두어 항상 최신 코드 기준으로 빌드를 트리거합니다.
+            </p>
+            <div class="fc-metric">15분 → 2분 <span style="font-size: 0.6em">(85%↓)</span></div>
+          </div>
+          <div class="feature-card fc-peach">
+            <div class="fc-no">02</div>
+            <h4>운영 배포 — 승인 게이트 준수</h4>
+            <p>
+              팀의 기존 승인 게이트 프로세스에 맞춰 Slack 승인 요청 작성·전송과
+              JIRA 상태 전이를 자동화했습니다. 승인 여부는 JIRA 티켓 상태 변경을
+              감지해 확인하고, PR 머지와 최종 실행 판단은 사람이 직접 합니다.
+            </p>
+            <div class="fc-metric">자동화 ∩ 안전성</div>
+          </div>
+          <div class="feature-card fc-mint">
+            <div class="fc-no">03</div>
+            <h4>업무 보고 자동화</h4>
+            <p>
+              JIRA 티켓과 Slack 활동을 자동 수집해 Claude가 정제한 뒤
+              Confluence 주간보고와 데일리 스크럼에 반영되도록 구성했습니다.
+            </p>
+            <div class="fc-metric">40분 → 5분</div>
+          </div>
+          <div class="feature-card">
+            <div class="fc-no">04</div>
+            <h4>코드리뷰 표준화</h4>
+            <p>
+              Frontend Fundamentals 4대 원칙(가독성·예측가능성·응집도·결합도)을
+              각각의 스킬로 분리해, 문제 유형에 맞는 일관된 리뷰 기준을 팀이
+              재사용할 수 있게 체계화했습니다.
+            </p>
+            <div class="fc-metric">리뷰 관점의 재사용</div>
+          </div>
+          <div class="feature-card fc-yellow">
+            <div class="fc-no">05</div>
+            <h4>화면 작업 자동화</h4>
+            <p>
+              Figma MCP로 시안을 팀 컨벤션·디자인 시스템 상수에 맞춰 변환하고,
+              구현 화면을 Figma와 요소 단위 px로 실측 대조해 "비슷해 보인다"식
+              주관 판정을 프로세스에서 제거했습니다.
+            </p>
+            <div class="fc-metric">반복 마크업 자동화</div>
+          </div>
+          <div class="feature-card fc-mustard">
+            <div class="fc-no">06</div>
+            <h4>약정서 생성 — 도메인 워크플로우</h4>
+            <p>
+              분기마다 docx 원문을 코드로 옮기던 수작업을 docx 파싱 → 템플릿
+              반영 → 백엔드 SQL 대조 → 실측 QA → 배포의 단일 흐름으로
+              전환했습니다. 스택이 다른 3개 레포를 하나의 플러그인 아래 레포별
+              스킬로 조직화했습니다.
+            </p>
+            <div class="fc-metric">문서 수작업 제거</div>
+          </div>
+        </div>
+
+        <!-- 지침의 도구화 + code window -->
+        <div class="split" style="margin-top: var(--s-section)">
+          <div class="reveal">
+            <h3 class="display-md">
+              문서로 적은 규칙을<br />코드로 강제합니다.
+            </h3>
+            <p class="body-md" style="margin-top: var(--s-md)">
+              스킬 문서에 적어둔 컨벤션은 LLM이든 사람이든 놓칠 수 있습니다.
+              기계적으로 판정 가능한 규칙을 정적 검사 도구
+              <code
+                style="
+                  font-family: var(--mono);
+                  font-size: 0.9em;
+                  background: var(--surface-cream-strong);
+                  padding: 2px 6px;
+                  border-radius: 4px;
+                "
+                >contract-lint</code
+              >로 옮기고 PostToolUse 훅으로 파일 수정 순간마다 자동
+              실행되게 했습니다. 130여 개 계약서 전체를 판정하는 첫 실행에서
+              수년 전 계약서에 잠재해 있던 동일 유형의 결함을 곧바로
+              찾아냈습니다.
+            </p>
+            <p class="body-md" style="margin-top: var(--s-sm)">
+              "지침을 읽어야 지켜지는 규칙"이 "구조가 강제하는 규칙"으로
+              바뀌었습니다.
+            </p>
+          </div>
+          <div class="code-window reveal d1">
+            <div class="cw-bar">
+              <span class="t-dot"></span><span class="t-dot"></span
+              ><span class="t-dot"></span>
+              <span class="cw-title">.claude/skills/deploy-dev/SKILL.md</span>
+            </div>
+            <div class="cw-body">
+              <span class="cm"># git remote를 감지해 Jenkins Job을 자동 매핑하고,</span
+              ><br /><span class="cm"
+                ># 푸시 완료 후 Jenkins REST API를 curl로 호출해 빌드를
+                트리거한다.</span
+              ><br /><span class="kw">trigger</span>:
+              <span class="st">"배포"</span>, <span class="st">"deploy"</span>,
+              <span class="st">"stage 배포"</span><br /><span class="kw"
+                >steps</span
+              >:<br />&nbsp;&nbsp;- <span class="fn">detectRemote</span>()
+              <span class="cm"># → Jenkins Job 매핑</span><br />&nbsp;&nbsp;-
+              <span class="fn">parallel</span>(merge, tsc, createPR)<br />&nbsp;&nbsp;-
+              <span class="fn">awaitPush</span>()
+              <span class="cm"># 최신 코드 보장 — 하드 배리어</span
+              ><br />&nbsp;&nbsp;- <span class="fn">curl</span> -X POST
+              <span class="st">"$JENKINS_URL/job/$JOB/build"</span
+              ><br />&nbsp;&nbsp;&nbsp;&nbsp;--user
+              <span class="st">"$USER:$JENKINS_API_TOKEN"</span><br />&nbsp;&nbsp;-
+              <span class="fn">transitionJira</span>(<span class="st"
+                >"개발서버 배포"</span
+              >)
+            </div>
+          </div>
+        </div>
+
+        <div class="metric-row reveal" style="margin-top: var(--s-xxl)">
+          <div class="metric-card">
+            <div class="big">15분 <span class="accent">→</span> 2분</div>
+            <div class="cap">배포 1건당 처리 시간 · 약 85% 단축</div>
+          </div>
+          <div class="metric-card">
+            <div class="big">40분 <span class="accent">→</span> 5분</div>
+            <div class="cap">주간보고 작성 — JIRA·Slack 자동 수집 후 정제</div>
+          </div>
+          <div class="metric-card">
+            <div class="big">~60<span class="accent">%↓</span></div>
+            <div class="cap">Playwright MCP 기반 E2E 테스트 작성 속도</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE 02 : ECP 리뉴얼 -->
+    <section id="ecp" class="band canvas">
+      <div class="inner">
+        <div class="case-head">
+          <p class="case-index reveal">CASE 02 · 2025.11 — 2026.03</p>
+          <h2 class="display-lg reveal d1">
+            성능과 안정성을<br />구조로 풀었습니다.
+          </h2>
+          <div class="meta-row reveal d2">
+            <span class="period">아큐브® ECP 리뉴얼 · 안경사 전용 웹사이트</span>
+          </div>
+          <div class="chips reveal d2" style="margin-top: var(--s-md)">
+            <span class="chip">React</span><span class="chip">TypeScript</span>
+            <span class="chip">Tanstack Query</span><span class="chip">Vite</span>
+            <span class="chip">Emotion</span><span class="chip">Storybook</span>
+            <span class="chip">Playwright</span>
+          </div>
+        </div>
+
+        <!-- bundle chart -->
+        <div class="chart-wrap reveal">
+          <div>
+            <div class="bars" id="bundleBars" role="img"
+              aria-label="번들 크기 비교: 단순 코드 스플리팅 100% 대비 사전 오픈 빌드 분리 21.5%">
+              <div class="bar before">
+                <div class="bval">100%</div>
+                <div class="col" data-h="100"></div>
+                <div class="blabel">단순<br />코드 스플리팅</div>
+              </div>
+              <div class="bar after">
+                <div class="bval">21.5%</div>
+                <div class="col" data-h="21.5"></div>
+                <div class="blabel">사전 오픈<br />빌드 분리</div>
+              </div>
+            </div>
+          </div>
+          <div class="chart-caption">
+            <h3 class="display-md">번들 크기<br />78.5% 감축</h3>
+            <p>
+              전체 기능의 1/10만 사전 오픈해야 하는 요구사항에서, 환경변수로
+              사전 오픈 라우트는 early return 후 정식 라우트를 lazy import 해
+              트리쉐이킹을 유도했습니다.
+            </p>
+            <a
+              class="text-link"
+              style="margin-top: 14px"
+              href="https://medium.com/heyratel/%EB%9D%BC%ED%85%94%EC%95%A4%EB%93%9C%ED%8C%8C%ED%8A%B8%EB%84%88%EC%A6%88-dynamic%ED%95%9C-%EC%82%AC%EC%A0%84%EC%98%A4%ED%94%88-%EB%B9%8C%EB%93%9C%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%95%EA%B8%B0-ff6d66f981ee"
+              target="_blank"
+              rel="noopener"
+              >기술 블로그에서 자세히 <span class="chev">›</span></a
+            >
+          </div>
+        </div>
+
+        <div class="feat-list reveal" style="margin-top: var(--s-section)">
+          <div class="feat">
+            <div class="fn-no">01</div>
+            <div>
+              <h4>SPA 버전 폴링 시스템</h4>
+              <p>
+                캐싱으로 사용자가 최신 버전을 인지하지 못해 해결된 VOC가 반복
+                유입됐습니다. 빌드 시 Jenkins 빌드 번호가 담긴 version.json을
+                생성하고 5분 주기 폴링으로 변경을 감지, 강제 종료 없이 최신
+                버전 전환을 유도했습니다.
+              </p>
+            </div>
+          </div>
+          <div class="feat">
+            <div class="fn-no">02</div>
+            <div>
+              <h4>Context API 기반 상태 스코프 격리</h4>
+              <p>
+                주문 퍼널에서만 쓰이는 전역 상태가 수정 시 무관한 페이지까지
+                영향 범위를 넓혔습니다. Provider 트리 내에서만 접근 가능한
+                Context API로 마이그레이션하고 상태를 아토믹하게
+                분리·메모이제이션했습니다.
+              </p>
+            </div>
+          </div>
+          <div class="feat">
+            <div class="fn-no">03</div>
+            <div>
+              <h4>Playwright E2E + CI 연동</h4>
+              <p>
+                핵심 비즈니스 로직 결함을 사전에 방지하기 위해 Playwright E2E를
+                구축하고 Bitbucket Pipelines와 연동해 PR마다 크로스 브라우징
+                검증이 자동 실행되도록 했습니다.
+              </p>
+            </div>
+          </div>
+          <div class="feat">
+            <div class="fn-no">04</div>
+            <div>
+              <h4>유틸리티 타입 기반 타입 시스템 최적화</h4>
+              <p>
+                반복 타입 선언을 Pick·Partial 등으로 파생 타입 생성을
+                시스템화해, 원본 수정 시 파생 타입까지 자동 반영되는 구조로
+                타입 정의 중복을 40% 이상 줄였습니다.
+              </p>
+            </div>
+          </div>
+          <div class="feat">
+            <div class="fn-no">05</div>
+            <div>
+              <h4>Node.js 버전 관리의 인프라 의존성 제거</h4>
+              <p>
+                3개 Jenkins 파이프라인에 하드코딩돼 있던 Node 버전을
+                .nvmrc 단일 진실 공급원으로 통합했습니다. 버전 수정 파일이
+                3개에서 1개로 줄고, 관리 주체가 인프라 담당자에서 프론트엔드
+                개발자로 옮겨왔습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE 03 : 크리에이터클럽 -->
+    <section id="creator" class="band dark">
+      <div class="inner">
+        <div class="case-head">
+          <p class="case-index reveal">CASE 03 · 2025.01 —</p>
+          <h2 class="display-lg reveal d1">
+            하이브리드 앱의 통신과<br />안정성을 처음부터 설계했습니다.
+          </h2>
+          <div class="meta-row reveal d2">
+            <span class="period">크리에이터클럽 · 문화예술 종사자를 위한 신규 앱</span>
+            <a
+              class="text-link"
+              href="https://cre8orclub.com/"
+              target="_blank"
+              rel="noopener"
+              >소개 <span class="chev">›</span></a
+            >
+            <a
+              class="text-link"
+              href="https://apps.apple.com/kr/app/cre8orclub-creative-network/id6737261549"
+              target="_blank"
+              rel="noopener"
+              >App Store <span class="chev">›</span></a
+            >
+          </div>
+          <div class="chips reveal d2" style="margin-top: var(--s-md)">
+            <span class="chip">React</span><span class="chip">TypeScript</span>
+            <span class="chip">Tanstack Query</span><span class="chip">Vite</span>
+            <span class="chip">openapi-typescript</span>
+            <span class="chip">Emotion</span><span class="chip">Playwright</span>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="reveal">
+            <h3 class="display-md">
+              이탈 로그 성공률 10%,<br />한 줄로 100%가 됐습니다.
+            </h3>
+            <p class="body-md" style="margin-top: var(--s-md); color: var(--on-dark-soft)">
+              배포 후 플랫폼별 데이터를 분석하니 Android는 정상인데 iOS 이탈
+              로그만 대부분 유실되고 있었습니다. WebView dismiss 시 네이티브
+              레이어가 인스턴스 해제를 먼저 시작해, 버블 단계의
+              visibilitychange 핸들러가 실행될 시점에는 JS 컨텍스트가 이미
+              정리된 뒤였습니다.
+            </p>
+            <p class="body-md" style="margin-top: var(--s-sm); color: var(--on-dark-soft)">
+              핸들러를 캡처 단계로 옮겨 실행 시점을 이벤트 수명 주기의
+              최선두로 당기자, sendBeacon 요청 성공률이 10%에서 100%로
+              올라갔습니다.
+            </p>
+          </div>
+          <div class="code-window reveal d1">
+            <div class="cw-bar">
+              <span class="t-dot"></span><span class="t-dot"></span
+              ><span class="t-dot"></span>
+              <span class="cw-title">hooks/use체류시간로깅.ts</span>
+            </div>
+            <div class="cw-body">
+              <span class="cm">// iOS: visibilitychange 발생 전 인스턴스가 종료될 수 있어</span
+              ><br /><span class="cm"
+                >// capture: true로 이벤트를 최상단에서 먼저 캐치</span
+              ><br />window.<span class="fn">addEventListener</span>(<br />&nbsp;&nbsp;<span
+                class="st"
+                >"visibilitychange"</span
+              >,<br />&nbsp;&nbsp;비콘전송,<br />&nbsp;&nbsp;{
+              <span class="kw">capture</span>: <span class="kw">true</span> }<br />);<br /><br /><span
+                class="cm"
+                >// 성공률 10% → 100%</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="metric-row reveal" style="margin-top: var(--s-xxl)">
+          <div class="metric-card">
+            <div class="big">10% <span class="accent">→</span> 100%</div>
+            <div class="cap">iOS WebView 이탈 로그(sendBeacon) 요청 성공률</div>
+          </div>
+          <div class="metric-card">
+            <div class="big">양방향</div>
+            <div class="cap">확장 가능한 WebView 브릿지 통신 규약 확립</div>
+          </div>
+          <div class="metric-card">
+            <div class="big">1 <span class="accent">command</span></div>
+            <div class="cap">OpenAPI 스키마 → 타입 동기화 자동 완결</div>
+          </div>
+        </div>
+
+        <div class="feat-list reveal" style="margin-top: var(--s-xxl)">
+          <div class="feat">
+            <div class="fn-no">01</div>
+            <div>
+              <h4>확장 가능한 WebView 브릿지 설계</h4>
+              <p>
+                통신 방향에 따라 Query Parameter(네이티브→웹)·URL
+                Scheme(웹→네이티브)·Bridge(양방향)로 인터페이스를 분리하고,
+                Redux 액션 패턴을 참고해 이후 액션 추가만으로 확장 가능한 통신
+                규약을 확립했습니다.
+              </p>
+            </div>
+          </div>
+          <div class="feat">
+            <div class="fn-no">02</div>
+            <div>
+              <h4>OpenAPI 타입 동기화 자동화</h4>
+              <p>
+                잦은 API 변경으로 인한 수동 타입 갱신 병목을 openapi-typescript로
+                제거했습니다. required 누락 스키마는 필수 타입으로 강제 생성해
+                실제 API 계약과 타입 안전성을 일치시켰습니다.
+              </p>
+            </div>
+          </div>
+          <div class="feat">
+            <div class="fn-no">03</div>
+            <div>
+              <h4>텍스트 리소스 관리 자동화</h4>
+              <p>
+                하루 몇 건씩 들어오던 문구 수정 요청을, 기획팀이 쓰던 Google
+                Spreadsheet가 다국어 JSON과 타입 정의로 자동 변환되는 스크립트로
+                해결해 문구 수정 개발 리소스를 80% 이상 절감했습니다.
+              </p>
+            </div>
+          </div>
+          <div class="feat">
+            <div class="fn-no">04</div>
+            <div>
+              <h4>CloudFront 캐싱 전략 + CI/CD</h4>
+              <p>
+                WebView 휴리스틱 캐싱으로 인한 구버전 노출을
+                max-age=0 · s-maxage=1y 전략으로 해결하고, Bitbucket
+                Pipelines로 배포 브랜치 생성 시 파이프라인이 자동 실행되도록
+                구축했습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTED WORK -->
+    <section id="work" class="band canvas">
+      <div class="inner">
+        <p class="eyebrow reveal">Selected Work</p>
+        <h2 class="display-lg reveal d1" style="margin-bottom: var(--s-xxl)">
+          그 외 작업
+        </h2>
+        <div class="work-grid">
+          <article class="work-card reveal">
+            <div class="work-cover wordmark">
+              <span class="wm">비비디<em>Bibidi</em></span>
+              <span class="tag">2026.07</span>
+              <span class="tag award">우아한바톤 2026 · 2등 수상</span>
+            </div>
+            <div class="work-body">
+              <h3>비비디 (Bibidi)</h3>
+              <p class="wsub">AI 웨딩 준비 챗봇 · 우아한바톤 2026 해커톤 2등</p>
+              <p>
+                예비부부가 챗봇에게 말하면 웨딩홀·스튜디오·드레스·메이크업 업체
+                정보가 카드로 정리되고, 변경 이력·일정·예산을 자연어로 조회하는
+                웨딩 준비 기록 서비스입니다. 백엔드 2·프론트 1 팀 구성에서
+                프론트엔드를 단독 담당했습니다.
+              </p>
+              <div class="chips">
+                <span class="chip">React 19 · React Compiler</span
+                ><span class="chip">Vite (Rolldown)</span
+                ><span class="chip">Hono BFF</span
+                ><span class="chip">Vercel AI SDK</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-card reveal d1">
+            <div
+              class="work-cover"
+              style="background: url('./acuvue.png') center/cover"
+            >
+              <span class="tag">2024.05 – 2025.11</span>
+            </div>
+            <div class="work-body">
+              <h3>기타 아큐브® 프로젝트</h3>
+              <p class="wsub">백오피스 · 마이 아큐브 (웹/앱)</p>
+              <p>
+                Shadow DOM 기반 Web Component로 JSP 레거시의 전역 CSS 영향을
+                구조적으로 차단하고, Groovy로 Jenkins-Slack 배포 알림·패치노트
+                폼을 커스텀 구현했으며, getUserMedia와 Canvas로 웹 기반 커스텀
+                촬영 환경을 구축했습니다.
+              </p>
+              <div class="chips">
+                <span class="chip">JSP</span
+                ><span class="chip">Web Component</span
+                ><span class="chip">Canvas</span
+                ><span class="chip">Groovy</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="work-card reveal d2">
+            <div
+              class="work-cover"
+              style="background: url('./mamma_mia.png') center/cover"
+            >
+              <span class="tag">2025.08 – 2026.03</span>
+            </div>
+            <div class="work-body">
+              <h3>맘마미아</h3>
+              <p class="wsub">충무로 1km 반경 맛집 추천 서비스</p>
+              <p>
+                매장정보 어드민과 PWA를 개발하고, openapi-typescript 타입
+                동기화와 S3·CloudFront·GitHub Actions 배포 자동화를
+                구축했습니다.
+              </p>
+              <div class="chips">
+                <span class="chip">React</span><span class="chip">PWA</span
+                ><span class="chip">S3 · CloudFront</span>
+              </div>
+              <div class="wlinks">
+                <a
+                  class="text-link"
+                  href="https://github.com/Mamma-miaa/Mamma-Mia-Frontend"
+                  target="_blank"
+                  rel="noopener"
+                  >GitHub <span class="chev">›</span></a
+                >
+                <a
+                  class="text-link"
+                  href="https://mamma-mia.site/"
+                  target="_blank"
+                  rel="noopener"
+                  >Demo <span class="chev">›</span></a
+                >
+              </div>
+            </div>
+          </article>
+
+          <article class="work-card reveal d3">
+            <div
+              class="work-cover"
+              style="background: url('./celuveat.png') center/cover"
+            >
+              <span class="tag">2023.07 – 2023.11</span>
+            </div>
+            <div class="work-body">
+              <h3>셀럽잇</h3>
+              <p class="wsub">셀럽 추천 맛집 반응형 웹앱 · 우아한테크코스</p>
+              <p>
+                구글 지도 인터랙션을 개발하고 트리쉐이킹·코드 스플리팅으로 초기
+                로딩을 최적화했으며, MSW 목서버와 Cypress E2E로 안정성을
+                확보했습니다.
+              </p>
+              <div class="chips">
+                <span class="chip">React</span><span class="chip">MSW</span
+                ><span class="chip">Cypress</span>
+              </div>
+              <div class="wlinks">
+                <a
+                  class="text-link"
+                  href="https://github.com/woowacourse-teams/2023-celuveat"
+                  target="_blank"
+                  rel="noopener"
+                  >GitHub <span class="chev">›</span></a
+                >
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="band soft">
+      <div class="inner">
+        <p class="eyebrow reveal">Education</p>
+        <h2 class="display-lg reveal d1" style="margin-bottom: var(--s-xxl)">
+          교육
+        </h2>
+        <div class="edu-grid">
+          <div class="edu-card reveal">
+            <h3>세종대학교 외식경영학 학사</h3>
+            <p class="ep">2016.03 – 2022.02</p>
+            <ul class="bullets">
+              <li>제3·8회 교내 SW 알고리즘 경시대회 장려상</li>
+              <li>
+                <a
+                  href="https://github.com/greedy-team/self-paced-react-advanced/pull/24"
+                  target="_blank"
+                  rel="noopener"
+                  >개발 동아리 그리디 코드 리뷰어 활동</a
+                >
+                (2025.03 – 2026.02)
+              </li>
+            </ul>
+          </div>
+          <div class="edu-card reveal d1">
+            <h3>우아한테크코스 웹 프론트엔드 5기</h3>
+            <p class="ep">2023.02 – 2023.11</p>
+            <ul class="bullets">
+              <li>페어프로그래밍 · 현직자 코드리뷰 기반 미션 수행</li>
+              <li>JS·TS·React 단계별 학습, Jest·Cypress 테스트</li>
+              <li>
+                <a
+                  href="https://youtu.be/ut10rvh1vug?si=IdUrBx7fHf2d8849"
+                  target="_blank"
+                  rel="noopener"
+                  >번들사이즈 최적화 주제 발표 (YouTube)</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <p class="footer-name">김민석 — Frontend Engineer</p>
+        <div class="footer-links">
+          <a href="mailto:minseok1061@gmail.com">minseok1061@gmail.com</a>
+          <a href="tel:010-5258-1305">010-5258-1305</a>
+          <a href="https://github.com/shackstack" target="_blank" rel="noopener"
+            >GitHub</a
+          >
+          <a
+            href="https://www.linkedin.com/in/민석-김-13002a238/"
+            target="_blank"
+            rel="noopener"
+            >LinkedIn</a
+          >
+          <a
+            href="https://medium.com/heyratel/%EB%9D%BC%ED%85%94%EC%95%A4%EB%93%9C%ED%8C%8C%ED%8A%B8%EB%84%88%EC%A6%88-dynamic%ED%95%9C-%EC%82%AC%EC%A0%84%EC%98%A4%ED%94%88-%EB%B9%8C%EB%93%9C%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%95%EA%B8%B0-ff6d66f981ee"
+            target="_blank"
+            rel="noopener"
+            >Tech Blog</a
+          >
+        </div>
+        <p class="footer-legal">
+          라텔앤드파트너즈 프론트엔드 엔지니어 · 2024 우수사원상 · © 2026 김민석
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.documentElement.classList.add("reveal-on");
+
+      // 인쇄/PDF: 스크롤 의존 요소를 즉시 모두 표시
+      function showAllForPrint() {
+        document
+          .querySelectorAll(".reveal")
+          .forEach((el) => el.classList.add("in"));
+        document.querySelectorAll("#bundleBars .col").forEach((c) => {
+          c.style.height = c.dataset.h + "%";
+        });
+      }
+      if (window.matchMedia && window.matchMedia("print").matches)
+        showAllForPrint();
+      if (new URLSearchParams(location.search).has("print")) showAllForPrint();
+      window.addEventListener("beforeprint", showAllForPrint);
+
+      // scroll reveal
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.15, rootMargin: "0px 0px -8% 0px" },
+      );
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+      // bundle bar chart — animate height when in view
+      const barWrap = document.getElementById("bundleBars");
+      if (barWrap) {
+        const barIO = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                barWrap.querySelectorAll(".col").forEach((c) => {
+                  c.style.height = c.dataset.h + "%";
+                });
+                barIO.unobserve(barWrap);
+              }
+            });
+          },
+          { threshold: 0.4 },
+        );
+        barIO.observe(barWrap);
+      }
+    </script>
+  </body>
+</html>
